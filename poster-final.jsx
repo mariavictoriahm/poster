@@ -18,7 +18,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
     { code: "M-03", name: t.m3_name, desc: t.m3_desc, swatch: "var(--beige)" },
     { code: "M-04", name: t.m4_name, desc: t.m4_desc, swatch: "linear-gradient(180deg, #fff 50%, #f0eee9 50%)" },
     { code: "M-05", name: t.m5_name, desc: t.m5_desc, swatch: "oklch(0.30 0.005 80)" },
-    { code: "M-06", name: lang==="es"?"Iluminación":"Lighting", desc: lang==="es"?"LED 3000K":"LED 3000K", swatch: "linear-gradient(180deg, oklch(0.96 0.04 90), oklch(0.84 0.06 90))" }
+    { code: "M-06", name: lang==="es"?"Iluminación":"Lighting", desc: lang==="es"?"LED COB 3000K":"LED 3000K", swatch: "linear-gradient(180deg, oklch(0.96 0.04 90), oklch(0.84 0.06 90))" }
   ];
 
   return (
@@ -49,7 +49,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
         <div style={{ ...mono, lineHeight: 1.85, textAlign: "right", color: "var(--ink)" }}>
           <div>A1.0 / 01</div>
           <div>{t.date}</div>
-          <div>REF · {t.ref}</div>
+          <div>Código postal · {t.ref}</div>
           <div>{t.arch.toUpperCase()}</div>
         </div>
       </header>
@@ -122,7 +122,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
                 <div style={{ padding: "6px 8px" }}>
                   <div style={{ ...mono, fontSize: 8.5 }}>{m.code}</div>
                   <div style={{ fontSize: 11, fontWeight: 500, marginTop: 1 }}>{m.name}</div>
-                  <div style={{ fontSize: 9, color: "var(--ink-soft)", marginTop: 1, lineHeight: 1.3 }}>{m.desc}</div>
+                  <div style={{ whiteSpace: 'pre-line', fontSize: 9, color: "var(--ink-soft)", marginTop: 1, lineHeight: 1.3 }}>{m.desc}</div>
                 </div>
               </div>
             ))}
@@ -151,7 +151,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
       <section style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: 22, marginBottom: 0 }}>
         <div>
           <div style={tag}>§05 · {t.s_renders}</div>
-          <img src="img/render-2.png" style={{ width: "100%", height: 190, objectFit: "cover", display: "block", border: "1px solid var(--ink)"  }} />
+          <img src="img/render-2.png" style={{ width: "100%", height: 190, objectFit: "cover", display: "block", border: "1px solid var(--ink)", borderBottom: "none" }} />
         </div>
         <div>
           <div style={tag}>{lang === "es" ? "Cronograma" : "Timeline"}</div>
@@ -164,7 +164,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
             }}>
               <div style={{ ...mono, fontSize: 9 }}>0{i+1}</div>
               <div style={{ fontSize: 12 }}>{s}</div>
-              <div style={{ ...mono, fontSize: 9, color: "var(--olive-deep)", textAlign: "right" }}>{["JAN","FEB","MAR","APR","APR"][i]}</div>
+              {/* <div style={{ ...mono, fontSize: 9, color: "var(--olive-deep)", textAlign: "right" }}>{["JAN","FEB","MAR","APR","APR"][i]}</div> */}
             </div>
           ))}
         </div>
