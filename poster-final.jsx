@@ -13,12 +13,12 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
   const tag = { ...mono, marginBottom: 10, color: "#56544f" };
 
   const swatches = [
-    { code: "M-01", name: t.m1_name, desc: t.m1_desc, swatch: "linear-gradient(135deg, oklch(0.78 0.07 70), oklch(0.66 0.085 65))" },
-    { code: "M-02", name: t.m2_name, desc: t.m2_desc, swatch: "var(--olive)" },
-    { code: "M-03", name: t.m3_name, desc: t.m3_desc, swatch: "var(--beige)" },
-    { code: "M-04", name: t.m4_name, desc: t.m4_desc, swatch: "linear-gradient(180deg, #fff 50%, #f0eee9 50%)" },
-    { code: "M-05", name: t.m5_name, desc: t.m5_desc, swatch: "oklch(0.30 0.005 80)" },
-    { code: "M-06", name: lang==="es"?"Iluminación":"Lighting", desc: lang==="es"?"LED COB 3000K":"LED 3000K", swatch: "linear-gradient(180deg, oklch(0.96 0.04 90), oklch(0.84 0.06 90))" }
+    { code: "M-01", name: t.m1_name, desc: t.m1_desc, swatch: "url('img/textura.png')" },
+    { code: "M-02", name: t.m2_name, desc: t.m2_desc, swatch: "url('img/verde.png" },
+    { code: "M-03", name: t.m3_name, desc: t.m3_desc, swatch: "url('img/revestimiento.png" },
+    { code: "M-04", name: t.m4_name, desc: t.m4_desc, swatch: "url('img/azulejo.png" },
+    { code: "M-05", name: t.m5_name, desc: t.m5_desc, swatch: "url('img/fregadero.png" },
+    { code: "M-06", name: lang === "es" ? "Iluminación" : "Lighting", desc: lang === "es" ? "LED COB 3000K" : "LED 3000K", swatch: "linear-gradient(180deg, oklch(0.96 0.04 90), oklch(0.84 0.06 90))" }
   ];
 
   return (
@@ -40,7 +40,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
             fontSize: 100, lineHeight: 0.92, margin: "12px 0 0",
             letterSpacing: "-0.045em"
           }}>
-            {lang === "es" ? "Reforma" : "Kitchen"}<br/>
+            {lang === "es" ? "Reforma" : "Kitchen"}<br />
             <span style={{ fontStyle: "italic", fontFamily: "'Fraunces', serif", fontWeight: 300, color: "var(--olive-deep)" }}>
               {lang === "es" ? "de Cocina" : "Renovation"}
             </span>
@@ -104,7 +104,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
       <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22, marginBottom: 24 }}>
         <div>
           <div style={tag}>§02 · {t.s_plan}</div>
-          <div style={{ background: "white", border: "1px solid var(--rule)", padding: 8, height: 250, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ background: "--paper", border: "none", padding: 8, height: 250, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <img src="img/plan.png" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
           </div>
           <div style={{ ...mono, display: "flex", justifyContent: "space-between", marginTop: 6 }}>
@@ -118,7 +118,27 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
             {swatches.map(m => (
               <div key={m.code} style={{ border: "1px solid var(--rule)", background: "white" }}>
-                <div style={{ height: 64, background: m.swatch, borderBottom: "1px solid var(--rule)" }} />
+                <div style={{
+                  height: 64,
+                  background: m.swatch,
+                  backgroundPosition: "center",
+                  borderBottom: "1px solid var(--rule)",
+
+                  // --- INICIO DE LA SOLUCIÓN ---
+
+                  // 1. Evitamos que el M-04 se repita si lo hacemos más pequeño
+                  backgroundRepeat: m.code === "M-04" ? "no-repeat" : "repeat",
+
+                  // 2. Condicional para el tamaño:
+                  // Si es M-04, usa un tamaño más pequeño (ej: 50% o "contain").
+                  // Si no, usa "cover" para las texturas grandes.
+                  backgroundSize: m.code === "M-04" ? "143%" : "cover",
+
+                  // Aseguramos que haya fondo blanco debajo si la imagen no ocupa todo
+                  backgroundColor: "white"
+
+                  // --- FIN DE LA SOLUCIÓN ---
+                }} />
                 <div style={{ padding: "6px 8px" }}>
                   <div style={{ ...mono, fontSize: 8.5 }}>{m.code}</div>
                   <div style={{ fontSize: 11, fontWeight: 500, marginTop: 1 }}>{m.name}</div>
@@ -134,9 +154,9 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
       <section style={{ marginBottom: 22 }}>
         <div style={tag}>§04 · {t.s_views}</div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
-          {[1,2,3,4].map(i => (
+          {[1, 2, 3, 4].map(i => (
             <div key={i}>
-              <div style={{ background: "white", border: "1px solid var(--rule)", padding: 6, aspectRatio: "1.25 / 1", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ background: "--paper", border: "none", padding: 6, aspectRatio: "1.25 / 1", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <img src={`img/view-${i}.png`} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
               </div>
               <div style={{ ...mono, marginTop: 5, display: "flex", justifyContent: "space-between" }}>
@@ -162,7 +182,7 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
               borderBottom: i < 4 ? "1px solid var(--rule)" : "none",
               alignItems: "center"
             }}>
-              <div style={{ ...mono, fontSize: 9 }}>0{i+1}</div>
+              <div style={{ ...mono, fontSize: 9 }}>0{i + 1}</div>
               <div style={{ fontSize: 12 }}>{s}</div>
               {/* <div style={{ ...mono, fontSize: 9, color: "var(--olive-deep)", textAlign: "right" }}>{["JAN","FEB","MAR","APR","APR"][i]}</div> */}
             </div>
@@ -171,17 +191,17 @@ const FinalPoster = ({ lang = "es", showSketch = true, showCotas = true }) => {
       </section>
 
       {/* FOOTER */}
-        <div style={{ height: 1, background: "var(--ink)", marginBottom: 10 }} />
-        <footer style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr",
-          ...mono, color: "var(--ink)"
-        }}>
-          <div>{t.arch}</div>
-          <div>{t.scale} 1:50</div>
-          <div>{t.address}</div>
-          <div style={{ textAlign: "right" }}>A1.0 — 01 / 01</div>
-        </footer>
-      </div>
+      <div style={{ height: 1, background: "var(--ink)", marginBottom: 10 }} />
+      <footer style={{
+        display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr",
+        ...mono, color: "var(--ink)"
+      }}>
+        <div>{t.arch}</div>
+        <div>{t.scale} 1:50</div>
+        <div>{t.address}</div>
+        <div style={{ textAlign: "right" }}>A1.0 — 01 / 01</div>
+      </footer>
+    </div>
   );
 };
 
